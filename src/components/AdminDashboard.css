@@ -1,0 +1,280 @@
+.admin-dashboard {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background-color: #f8f9fa;
+}
+
+.navbar {
+  background-color: #ffffff;
+  padding: 1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin: 0;
+  color: #34495e;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.notification-icon-wrapper {
+  position: relative;
+}
+
+.notification-icon {
+  width: 24px;
+  height: 24px;
+  color: #34495e;
+}
+
+.notification-badge {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background-color: #e74c3c;
+  color: white;
+  border-radius: 50%;
+  padding: 2px 5px;
+  font-size: 0.75rem;
+}
+
+.user-details {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.user-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.user-name {
+  display: block;
+  font-weight: bold;
+  color: #34495e;
+}
+
+.user-role {
+  display: block;
+  font-size: 0.875rem;
+  color: #6c757d;
+}
+
+.dashboard-content {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.sidebar {
+  width: 250px;
+  background-color: #34495e;
+  padding: 1rem;
+}
+
+.sidebar-header {
+  color: white;
+  font-size: 1.25rem;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar li {
+  padding: 0.75rem 1rem;
+  color: white;
+  cursor: pointer;
+  border-radius: 4px;
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: background-color 0.3s;
+}
+
+.sidebar li.active {
+  background-color: #1abc9c;
+}
+
+.sidebar li:hover:not(.active) {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.main-content {
+  flex: 1;
+  padding: 2rem;
+  overflow-y: auto;
+}
+
+.card {
+  margin-bottom: 2rem;
+  border: none;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.card-body {
+  padding: 1.5rem;
+}
+
+.card h5 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #34495e;
+  margin-bottom: 0.5rem;
+}
+
+.card .h5 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #1abc9c;
+  margin-bottom: 0.5rem;
+}
+
+.card .text-muted {
+  font-size: 0.875rem;
+  color: #6c757d;
+}
+
+
+.chart-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #34495e;
+  margin-bottom: 1.5rem;
+}
+
+.chart-container {
+  height: 300px;
+}
+
+/* Tables */
+.no-extra-card {
+  box-shadow: none; /* Supprimer les ombres pour éviter un effet de carte superposée */
+  border: none;     /* Supprimer la bordure pour ne pas avoir d'effet de carte supplémentaire */
+  padding: 0;       /* Enlever le padding qui pourrait ajouter de l'espace inutile */
+}
+
+.table-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  color: #34495e; /* Couleur des titres */
+  text-align: left;
+}
+
+.custom-table thead th {
+  background-color: #28a745; /* Vert pour le background des th */
+  color: white;
+  text-align: center;
+}
+
+.table td, .table th {
+  font-size: 0.875rem; /* Diminuer la taille pour une meilleure lisibilité */
+  text-align: center;
+}
+
+.custom-progress {
+  height: 20px; /* Assure une hauteur cohérente pour les barres de progression */
+}
+.pagination .page-item.active .page-link {
+  background-color: #4ade80;
+  border-color: #4ade80;
+}
+
+.pagination .page-link {
+  color: #333;
+}
+
+.pagination .page-item.active .page-link {
+  color: white;
+}
+
+.badge {
+  padding: 5px 10px;
+  font-size: 0.875rem;
+}
+
+@media (max-width: 768px) {
+  .dashboard-content {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+
+  .main-content {
+    padding: 1rem;
+  }
+
+  .card {
+    margin-bottom: 1rem;
+  }
+}
+
+
+
+/* Styles pour la carte Caisse */
+.icon-wrapper {
+  background-color: rgba(16, 185, 129, 0.1);
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon-wrapper .icon {
+  color: #10b981;
+}
+
+/* Styles pour les titres des cartes de graphiques */
+.chart-card .chart-title {
+  background-color: #10b981;
+  color: white;
+  padding: 0.75rem 1rem;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  margin: -1.5rem -1.5rem 1.5rem -1.5rem;
+}
+
+.chart-card {
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+/* Ajustement de la taille des colonnes pour les graphiques */
+@media (min-width: 768px) {
+  .col-md-8 {
+    flex: 0 0 66.666667%;
+    max-width: 66.666667%;
+  }
+  .col-md-4 {
+    flex: 0 0 33.333333%;
+    max-width: 33.333333%;
+  }
+}
+
