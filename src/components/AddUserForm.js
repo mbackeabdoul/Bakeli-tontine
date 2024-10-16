@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Modal, Button, Form } from 'react-bootstrap';
+import './SignUpForm.css'; // Ajoutez le style de votre formulaire d'inscription ici
 
 const AddUserForm = ({ show, onHide, onAdd }) => {
   const [newUser, setNewUser] = useState({
@@ -21,34 +22,93 @@ const AddUserForm = ({ show, onHide, onAdd }) => {
   };
 
   return (
-    <Modal show={show} onHide={onHide}>
+    <Modal show={show} onHide={onHide} centered>
       <Modal.Header closeButton>
         <Modal.Title>Ajouter un membre</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <Form onSubmit={handleSubmit}>
-          <Form.Group className="mb-3">
-            <Form.Control type="text" name="name" placeholder="Nom" onChange={handleChange} required />
-          </Form.Group>
-          <Form.Group className="mb-3">
-            <Form.Control type="date" name="startDate" onChange={handleChange} required />
-          </Form.Group>
-          <Form.Group className="mb-3">
-            <Form.Control type="text" name="threshold" placeholder="Seuil" onChange={handleChange} required />
-          </Form.Group>
-          <Form.Group className="mb-3">
-            <Form.Control type="number" name="progress" placeholder="Progression" onChange={handleChange} required />
-          </Form.Group>
-          <Form.Group className="mb-3">
-            <Form.Select name="status" onChange={handleChange} required>
+        <form className="sign-up-form" onSubmit={handleSubmit}>
+          <div className="row">
+            <div className="col-md-6">
+              <div className="form-group mb-3">
+                <label className="form-label text-start d-block">Nom</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  name="name"
+                  placeholder="Nom"
+                  value={newUser.name}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+            </div>
+            <div className="col-md-6">
+              <div className="form-group mb-3">
+                <label className="form-label text-start d-block">Date de début</label>
+                <input
+                  type="date"
+                  className="form-control"
+                  name="startDate"
+                  value={newUser.startDate}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+            </div>
+          </div>
+
+          <div className="row">
+            <div className="col-md-6">
+              <div className="form-group mb-3">
+                <label className="form-label text-start d-block">Seuil</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  name="threshold"
+                  placeholder="Seuil"
+                  value={newUser.threshold}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+            </div>
+            <div className="col-md-6">
+              <div className="form-group mb-3">
+                <label className="form-label text-start d-block">Progression</label>
+                <input
+                  type="number"
+                  className="form-control"
+                  name="progress"
+                  placeholder="Progression"
+                  value={newUser.progress}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+            </div>
+          </div>
+
+          <div className="form-group mb-3">
+            <label className="form-label text-start d-block">Statut</label>
+            <select
+              className="form-control"
+              name="status"
+              value={newUser.status}
+              onChange={handleChange}
+              required
+            >
               <option value="En cours">En cours</option>
               <option value="Terminé">Terminé</option>
-            </Form.Select>
-          </Form.Group>
-          <Button variant="primary" type="submit">
-            Ajouter
-          </Button>
-        </Form>
+            </select>
+          </div>
+
+          <div className="text-center">
+            <Button variant="success" type="submit" className="btn btn-block">
+              Ajouter
+            </Button>
+          </div>
+        </form>
       </Modal.Body>
     </Modal>
   );
