@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect} from 'react';
 import profil from '../images/profile.png';
 import { Pagination, Form } from 'react-bootstrap'; // Ajout de Form ici
 import { AiOutlineFolder, AiOutlineEye } from 'react-icons/ai'; // Import des icônes d'archives et de prévisualisation
-import { IoEyeSharp } from "react-icons/io5";
-import { MdBlockFlipped } from "react-icons/md";
-import { IoArchiveOutline } from "react-icons/io5";
+import { IoEyeSharp } from 'react-icons/io5';
+import { MdBlockFlipped } from 'react-icons/md';
+import { IoArchiveOutline } from 'react-icons/io5';
+import { MdCircle } from "react-icons/md";
+// import { MdBlock } from "react-icons/md";
 
 
 
@@ -79,6 +81,8 @@ export default function AdminDashboard() {
   const [activeItem, setActiveItem] = useState('Dashboard');
   const [showAddForm, setShowAddForm] = useState(false);
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
   const [selectedUser, setSelectedUser] = useState({
     nom: 'Selena',
     prenom: 'Roy',
@@ -93,7 +97,9 @@ export default function AdminDashboard() {
   });
 
   const [formData, setFormData] = useState(selectedUser);
-
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
+  };
   const handleUserClick = (user) => {
     setSelectedUser(user);
     setFormData(user);
@@ -107,7 +113,7 @@ export default function AdminDashboard() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setSelectedUser(formData); 
+    setSelectedUser(formData);
     alert('Mise à jour réussie !');
   };
 
@@ -181,7 +187,7 @@ export default function AdminDashboard() {
             <Card.Body>
               <h5>Mai</h5>
               <p className="amount">100.000 FCFA</p>
-              <p className="text-muted small">Nombre de cotisation: 23</p>
+              <p className="text-muted">Nombre de cotisation: 23</p>
             </Card.Body>
           </Card>
         </Col>
@@ -293,174 +299,139 @@ export default function AdminDashboard() {
         </Col>
       </Row>
 
-      <Row className="my-4">
-        <Col md={6}>
-          <h5 className="table-title">Juin</h5>
-          <Card className="mb-4 no-extra-card">
-            <Card.Body>
-              <Table
-                responsive
-                borderless
-                className="custom-table"
-              >
-                <thead className="bg-success text-white">
-                  <tr>
-                    <th>Membres</th>
-                    <th>Montant</th>
-                    <th>Date</th>
-                    <th>Statut</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>Selena Roy</td>
-                    <td>25.000 FCFA</td>
-                    <td>01-06-2022</td>
-                    <td>
-                      <span className="text-success">Validé</span>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Emma Watson</td>
-                    <td>25.000 FCFA</td>
-                    <td>01-06-2022</td>
-                    <td>
-                      <span className="text-primary">En attente</span>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Jhon Robert</td>
-                    <td>25.000 FCFA</td>
-                    <td>01-06-2022</td>
-                    <td>
-                      <span className="text-success">Validé</span>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Anne Hathaway</td>
-                    <td>25.000 FCFA</td>
-                    <td>01-06-2022</td>
-                    <td>
-                      <span className="text-primary">En attente</span>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Ravi Shankar</td>
-                    <td>25.000 FCFA</td>
-                    <td>01-06-2022</td>
-                    <td>
-                      <span className="text-success">Validé</span>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Emma Stone</td>
-                    <td>25.000 FCFA</td>
-                    <td>01-06-2022</td>
-                    <td>
-                      <span className="text-success">Validé</span>
-                    </td>
-                  </tr>
-                </tbody>
-              </Table>
-            </Card.Body>
-          </Card>
-        </Col>
+  <div className="row my-4">
+  {/* Tableau Juin */}
+  <div className="col-md-6">
+    <h5 className="table-title">Juin</h5>
+    <div className="card mb-4 no-extra-card p-0">
+      <div className="card-body">
+        <table className="table custom-table">
+          <thead>
+            <tr>
+              <th>Membres</th>
+              <th>Montant</th>
+              <th>Date</th>
+              <th>Statut</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Selena Roy</td>
+              <td>25.000 FCFA</td>
+              <td>01-06-2022</td>
+              <td><span className="text-success">Validé</span></td>
+            </tr>
+            <tr>
+              <td>Emma Watson</td>
+              <td>25.000 FCFA</td>
+              <td>01-06-2022</td>
+              <td><span className="text-primary">En attente</span></td>
+            </tr>
+            <tr>
+              <td>Jhon Robert</td>
+              <td>25.000 FCFA</td>
+              <td>01-06-2022</td>
+              <td><span className="text-success">Validé</span></td>
+            </tr>
+            <tr>
+              <td>Anne Hathaway</td>
+              <td>25.000 FCFA</td>
+              <td>01-06-2022</td>
+              <td><span className="text-grey">En attente</span></td>
+            </tr>
+            {/* <tr>
+              <td>Ravi Shankar</td>
+              <td>25.000 FCFA</td>
+              <td>01-06-2022</td>
+              <td><span className="text-success">Validé</span></td>
+            </tr>
+            <tr>
+              <td>Emma Stone</td>
+              <td>25.000 FCFA</td>
+              <td>01-06-2022</td>
+              <td><span className="text-success">Validé</span></td>
+            </tr> */}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
 
-        <Col md={6}>
-          <h5 className="table-title">Top progression</h5>
-          <Card className="mb-4 no-extra-card">
-            <Card.Body>
-              <Table
-                responsive
-                borderless
-                className="custom-table"
-              >
-                <thead className="bg-success text-white">
-                  <tr>
-                    <th>Membres</th>
-                    <th>Date début</th>
-                    <th>Progression</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>Selena Roy</td>
-                    <td>01-06-2022</td>
-                    <td>
-                      <ProgressBar
-                        now={100}
-                        label={`100%`}
-                        variant="success"
-                        className="custom-progress"
-                      />
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Jhon Robert</td>
-                    <td>01-06-2022</td>
-                    <td>
-                      <ProgressBar
-                        now={100}
-                        label={`100%`}
-                        variant="success"
-                        className="custom-progress"
-                      />
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Emma Stone</td>
-                    <td>01-06-2022</td>
-                    <td>
-                      <ProgressBar
-                        now={64}
-                        label={`64%`}
-                        variant="info"
-                        className="custom-progress"
-                      />
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Emma Watson</td>
-                    <td>01-06-2022</td>
-                    <td>
-                      <ProgressBar
-                        now={57}
-                        label={`57%`}
-                        variant="info"
-                        className="custom-progress"
-                      />
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Anne Hathaway</td>
-                    <td>01-06-2022</td>
-                    <td>
-                      <ProgressBar
-                        now={50}
-                        label={`50%`}
-                        variant="info"
-                        className="custom-progress"
-                      />
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Ravi Shankar</td>
-                    <td>01-06-2022</td>
-                    <td>
-                      <ProgressBar
-                        now={50}
-                        label={`50%`}
-                        variant="info"
-                        className="custom-progress"
-                      />
-                    </td>
-                  </tr>
-                </tbody>
-              </Table>
-            </Card.Body>
-          </Card>
-        </Col>
-      </Row>
+  {/* Tableau Top Progression */}
+  <div className="col-md-6">
+    <h5 className="table-title">Top progression</h5>
+    <div className="card mb-4 no-extra-card">
+      <div className="card-body">
+        <table className="table custom-table">
+          <thead className="bg-success text-white">
+            <tr>
+              <th>Membres</th>
+              <th>Date début</th>
+              <th>Progression</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Selena Roy</td>
+              <td>01-06-2022</td>
+              <td>
+                <div className="progress-bar-container">
+                  <div className="progress-v success" style={{ width: "100%" }}>100%</div>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>Jhon Robert</td>
+              <td>01-06-2022</td>
+              <td>
+                <div className="progress-bar-container">
+                  <div className="progress-v success" style={{ width: "100%" }}>100%</div>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>Emma Stone</td>
+              <td>01-06-2022</td>
+              <td>
+                <div className="progress-bar-container">
+                  <div className="progress-v info" style={{ width: "64%" }}>64%</div>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>Emma Watson</td>
+              <td>01-06-2022</td>
+              <td>
+                <div className="progress-bar-container">
+                  <div className="progress-v info" style={{ width: "57%" }}>57%</div>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>Anne Hathaway</td>
+              <td>01-06-2022</td>
+              <td>
+                <div className="progress-bar-container">
+                  <div className="progress-v info" style={{ width: "50%" }}>50%</div>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>Ravi Shankar</td>
+              <td>01-06-2022</td>
+              <td>
+                <div className="progress-bar-container">
+                  <div className="progress-v info" style={{ width: "50%" }}>50%</div>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
       <Row className="mt-4">
         <Col>
           <div className="pagination-container">
@@ -480,49 +451,113 @@ export default function AdminDashboard() {
     </Container>
   );
 
-  const renderUsersPage = () => (
-    <Container fluid>
-      <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        {/* <h1 className="h2">Utilisateurs</h1> */}
+  const renderUsersPage = () => { 
+    const users = [
+      {
+        id: 1,
+        name: 'Selena Roy',
+        startDate: '01/01/2022',
+        threshold: '300.000 FCFA',
+        progress: 100,
+        status: 'Terminé',
+      },
+      {
+        id: 2,
+        name: 'Emma Watson',
+        startDate: '01/01/2022',
+        threshold: '300.000 FCFA',
+        progress: 57,
+        status: 'En cours',
+      },
+      {
+        id: 3,
+        name: 'Jhon Robert',
+        startDate: '01/01/2022',
+        threshold: '300.000 FCFA',
+        progress: 100,
+        status: 'Terminé',
+      },
+      {
+        id: 4,
+        name: 'Anne Hathaway',
+        startDate: '01/01/2022',
+        threshold: '300.000 FCFA',
+        progress: 50,
+        status: 'En cours',
+      },
+      {
+        id: 5,
+        name: 'Ravi Shankar',
+        startDate: '01/01/2022',
+        threshold: '300.000 FCFA',
+        progress: 50,
+        status: 'En cours',
+      },
+      {
+        id: 6,
+        name: 'Emma Stone',
+        startDate: '01/01/2022',
+        threshold: '300.000 FCFA',
+        progress: 64,
+        status: 'En cours',
+      },
+    ];
+
+    return (
+      <div className="users-page">
+  <div class="row mb-3">
+  <div class="col-md-4">
+    <div class="card card-vert">
+      <div class="card-body d-flex justify-content-center gap-3">
+        <div>
+          <h5 class="text-white">Membres Actifs</h5>
+          <p class="text-white">94 Membres</p>
+        </div>
+          <MdCircle />
+
+        {/* <i class="fas fa-user-check icon-active"></i>  */}
       </div>
-      <Row className="mb-3">
-        <Col md={4}>
-          <Card className="bg-success text-white">
-            <Card.Body>
-              <h5>Membres Actif</h5>
-              <p>94 Membres</p>
-            </Card.Body>
-          </Card>
-        </Col>
-        <Col md={4}>
-          <Card className="">
-            <Card.Body>
-              <h5>Membres Bloqués</h5>
-              <p>6 Membres</p>
-            </Card.Body>
-          </Card>
-        </Col>
-        <Col md={4}>
-          <Card>
-            <Card.Body>
-              <h5>Total Effectif</h5>
-              <p>100 Membres</p>
-            </Card.Body>
-          </Card>
-        </Col>
-      </Row>
-      <Row className='d-flex justify-content-end'>
-      <Button
+    </div>
+  </div>
+
+  <div class="col-md-4">
+    <div class="card">
+      <div class="card-body d-flex justify-content-center gap-3">
+        <div>
+          <h5>Membres Bloqués</h5>
+          <p>6 Membres</p>
+        </div>
+        {/* <MdBlockFlipped /> */}
+
+        {/* <MdBlock /> */}
+        {/* <i class="fas fa-user-slash icon-bloque"></i>. */}
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-4">
+    <div class="card">
+      <div class="card-body">
+        <h5>Total Effectif</h5>
+        <p>100 Membres</p>
+      </div>
+      <AddUserForm show={showAddForm} onHide={toggleAddForm} onAdd={addUser} />
+    </div>
+  </div>
+</div>
+
+
+        <Row className="d-flex justify-content-end">
+          <Button
             className="buttonrow"
             onClick={toggleAddForm}
           >
             Ajouter
           </Button>
-      </Row>
-      <Card className='my-3'>
-      
-        <Card.Body>
-          <Table responsive>
+        </Row>
+        {/* <h2>Utilisateurs</h2> */}
+        <div className="users-table my-2">
+          <table>
             <thead>
               <tr>
                 <th>Membres</th>
@@ -540,88 +575,107 @@ export default function AdminDashboard() {
                   <td>{user.startDate}</td>
                   <td>{user.threshold}</td>
                   <td>
-                    <ProgressBar
-                      now={user.progress}
-                      label={`${user.progress}%`}
-                    />
+                    <div className="progress-bar">
+                      <div
+                        className="progress"
+                        style={{
+                          width: `${user.progress}%`,
+                          backgroundColor:
+                            user.status === 'Terminé' ? '#10b981' : '#2c3e50',
+                        }}
+                      ></div>
+                    </div>
+                    <span className="progress-text">{user.progress}%</span>
                   </td>
                   <td>
                     <span
-                      className={`badge ${
-                        user.status === 'Terminé' ? 'bg-success' : 'bg-warning'
+                      className={`status ${
+                        user.status === 'Terminé' ? 'completed' : 'in-progress'
                       }`}
                     >
                       {user.status}
                     </span>
                   </td>
-                  <td>
-                    <Eye
-                      size={18}
-                      className="me-2"
-                      style={{ cursor: 'pointer' }}
-                    />
-                    <IoArchiveOutline 
-                      size={18}
-                      className="me-2"
-                      style={{ cursor: 'pointer' }}
-                    />
-                    <MdBlockFlipped
-                      size={18}
-                      style={{ cursor: 'pointer' }}
-                    />
+                  <td className="actions">
+                    <Eye size={18} />
+                    <IoArchiveOutline size={18} />
+                    <MdBlockFlipped size={18} />
                   </td>
                 </tr>
+                
               ))}
             </tbody>
-          </Table>
-        </Card.Body>
-      </Card>
-      <AddUserForm
-        show={showAddForm}
-        onHide={toggleAddForm}
-        onAdd={addUser}
-      />
-    </Container>
-  );
+          </table>
+        </div>
+        <div className="pagination">
+          <button className="prev">Previous page</button>
+          <button className="active">1</button>
+          <button>2</button>
+          <button>3</button>
+          <button>4</button>
+          <button className="next">Next page</button>
+        </div>
+      </div>
+    );
+  };
 
-  const renderCotisationsPage = () => (
-    <Container fluid>
-      {/* <h1 className="mb-4 text-start">Cotisations</h1> */}
-      <Row>
-        <Col md={4}>
-          <Card className="summary-card mb-4">
-            <Card.Body>
-              <h5>Juin</h5>
-              <p className="amount">225.000 FCFA</p>
-            </Card.Body>
-          </Card>
-        </Col>
-        <Col md={4}>
-          <Card className="summary-card mb-4">
-            <Card.Body>
-              <h5>Mai</h5>
-              <p className="amount">100.000 FCFA</p>
-            </Card.Body>
-          </Card>
-        </Col>
-        <Col md={4}>
-          <Card className="summary-card mb-4">
-            <Card.Body>
-              <h5>Total Caisse</h5>
-              <p className="amount">3.500.000 FCFA</p>
-              <ProgressBar
-                now={77}
-                label={`77% du seuil`}
-                variant="success"
-              />
-            </Card.Body>
-          </Card>
-        </Col>
-      </Row>
-      <Card>
-        <Card.Body>
-          <Table responsive>
-            <thead className="bg-success text-white">
+  const renderCotisationsPage = () => {
+    const users = [
+      { id: 1, name: 'Selena Roy', startDate: '01/01/2022' },
+      { id: 2, name: 'Emma Watson', startDate: '01/01/2022' },
+      { id: 3, name: 'Jhon Robert', startDate: '01/01/2022' },
+      { id: 4, name: 'Anne Hathaway', startDate: '01/01/2022' },
+    ];
+  
+    return (
+      <div className="container-fluid">
+        {/* Cartes récapitulatives */}
+        <div className="row mb-4">
+          <div className="col-md-4">
+            <div className="card summary-card text-center" style={{ border: 'none', backgroundColor: '#f8f9fa' }}>
+              <div className="card-body">
+                <h5 className="card-title" style={{ color: '#093545' }}>Juin</h5>
+                <p className="amount" style={{ fontSize: '1.5rem', fontWeight: 'bold', color: '#093545' }}>225.000 FCFA</p>
+              </div>
+            </div>
+          </div>
+          <div className="col-md-4">
+            <div className="card summary-card text-center" style={{ border: 'none', backgroundColor: '#f8f9fa' }}>
+              <div className="card-body">
+                <h5 className="card-title" style={{ color: '#093545' }}>Mai</h5>
+                <p className="amount" style={{ fontSize: '1.5rem', fontWeight: 'bold', color: '#093545' }}>100.000 FCFA</p>
+              </div>
+            </div>
+          </div>
+          <div className="col-md-4">
+            <div className="card summary-card text-center" style={{ border: 'none', backgroundColor: '#f8f9fa' }}>
+              <div className="card-body">
+                <h5 className="card-title" style={{ color: '#093545' }}>Total Caisse</h5>
+                <p className="amount" style={{ fontSize: '20px', fontWeight: 'bold', color: '#093545' }}>3.500.000 FCFA</p>
+                <div className="progress" style={{ height: '8px' }}>
+                  <div
+                    className="progress-bar"
+                    role="progressbar"
+                    style={{ width: '77%', backgroundColor: '#28a745' }}
+                    aria-valuenow="77"
+                    aria-valuemin="0"
+                    aria-valuemax="100"
+                  >                   
+                  </div>
+                </div>
+                <p className='text-end fs-6'>
+                <span style={{color : '#093545' }}> 77% du seuil</span>
+                </p>
+
+              </div>
+            </div>
+          </div>
+        </div>
+  
+        <div className="card custom-card">
+        <div className="card-body p-0">
+          <table className="table table-responsive custom-table">
+            <thead className="custom-thead">
               <tr>
                 <th>Membres</th>
                 <th>Date début</th>
@@ -638,19 +692,17 @@ export default function AdminDashboard() {
                   <td>200.000 FCFA</td>
                   <td>100.000 FCFA</td>
                   <td>
-                    <Eye
-                      size={18}
-                      style={{ cursor: 'pointer' }}
-                    />
+                    <AiOutlineEye size={18} style={{ cursor: 'pointer' }} />
                   </td>
                 </tr>
               ))}
             </tbody>
-          </Table>
-        </Card.Body>
-      </Card>
-    </Container>
-  );
+          </table>
+        </div>
+      </div>
+      </div>
+    );
+  };
 
   const renderParametersPage = () => (
     <Container fluid>
@@ -951,7 +1003,7 @@ export default function AdminDashboard() {
                         variant="link"
                         title="Prévisualiser"
                       >
-                        <AiOutlineEye  />
+                        <AiOutlineEye />
                       </Button>
                       <Button
                         variant="link"
@@ -965,11 +1017,11 @@ export default function AdminDashboard() {
                     <td>Emma Watson</td>
                     <td>01/01/2022</td>
                     <td>
-                    <Button
+                      <Button
                         variant="link"
                         title="Prévisualiser"
                       >
-                        <AiOutlineEye  />
+                        <AiOutlineEye />
                       </Button>
                       <Button
                         variant="link"
@@ -1039,14 +1091,13 @@ export default function AdminDashboard() {
                   <td>{membre.dateDebut}</td>
                   <td>
                     <button className="btn btn-sm btn-outline-secondary me-2">
-                    <IoEyeSharp />
+                      <IoEyeSharp />
 
                       {/* <i className="bi bi-eye"></i> */}
                     </button>
                     <button className="btn btn-sm btn-outline-danger">
                       {/* <i className="bi bi-ban"></i> */}
                       <MdBlockFlipped />
-
                     </button>
                   </td>
                 </tr>
@@ -1129,7 +1180,8 @@ export default function AdminDashboard() {
   return (
     <div className="admin-dashboard">
       <div className="dashboard-content">
-        <aside className="sidebar">
+      <aside className={`sidebar ${isMobileMenuOpen ? 'mobile-open' : ''}`}>
+
           <div className="sidebar-header">
             <Wallet size={24} />
             <span>Bakéli Tontine</span>
@@ -1181,6 +1233,9 @@ export default function AdminDashboard() {
 
         <div className="main-section">
           <nav className="navbar">
+          <button className="mobile-menu-toggle" onClick={toggleMobileMenu}>
+            ☰
+          </button>
             <h1 className="navbar-title">{activeItem}</h1>
             <div className="user-info">
               {/* Existing Notification and User Dropdown */}
@@ -1253,7 +1308,6 @@ export default function AdminDashboard() {
           <main className="main-content">{renderContent()}</main>
         </div>
       </div>
-
     </div>
   );
 }
