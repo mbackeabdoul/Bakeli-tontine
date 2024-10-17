@@ -2,6 +2,11 @@ import React, { useState } from 'react';
 import profil from '../images/profile.png';
 import { Pagination, Form } from 'react-bootstrap'; // Ajout de Form ici
 import { AiOutlineFolder, AiOutlineEye } from 'react-icons/ai'; // Import des icônes d'archives et de prévisualisation
+import { IoEyeSharp } from "react-icons/io5";
+import { MdBlockFlipped } from "react-icons/md";
+import { IoArchiveOutline } from "react-icons/io5";
+
+
 
 import {
   Dropdown,
@@ -21,7 +26,6 @@ import {
   Wallet,
   Settings,
   DollarSign,
-  
   Eye,
   Edit,
   Trash2,
@@ -92,9 +96,9 @@ export default function AdminDashboard() {
 
   const handleUserClick = (user) => {
     setSelectedUser(user);
-    setFormData(user); // Initialiser le formulaire avec les données de l'utilisateur sélectionné
+    setFormData(user);
   };
- const [currentPage, setCurrentPage] = useState(1);
+  const [currentPage, setCurrentPage] = useState(1);
   const membresParPage = 5;
 
   const handleChange = (e) => {
@@ -103,10 +107,9 @@ export default function AdminDashboard() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setSelectedUser(formData); // Simuler la mise à jour de l'utilisateur sélectionné avec les nouvelles données
+    setSelectedUser(formData); 
     alert('Mise à jour réussie !');
   };
-
 
   const [users, setUsers] = useState([
     {
@@ -500,7 +503,7 @@ export default function AdminDashboard() {
           </Card>
         </Col>
         <Col md={4}>
-          <Card className="">
+          <Card>
             <Card.Body>
               <h5>Total Effectif</h5>
               <p>100 Membres</p>
@@ -508,16 +511,16 @@ export default function AdminDashboard() {
           </Card>
         </Col>
       </Row>
-      <Card>
-        <Card.Header className="d-flex justify-content-between align-items-center">
-          <h5 className="mb-0">Liste des membres</h5>
-          <Button
-            variant="primary"
+      <Row className='d-flex justify-content-end'>
+      <Button
+            className="buttonrow"
             onClick={toggleAddForm}
           >
             Ajouter
           </Button>
-        </Card.Header>
+      </Row>
+      <Card className='my-3'>
+      
         <Card.Body>
           <Table responsive>
             <thead>
@@ -557,12 +560,12 @@ export default function AdminDashboard() {
                       className="me-2"
                       style={{ cursor: 'pointer' }}
                     />
-                    <Edit
+                    <IoArchiveOutline 
                       size={18}
                       className="me-2"
                       style={{ cursor: 'pointer' }}
                     />
-                    <Trash2
+                    <MdBlockFlipped
                       size={18}
                       style={{ cursor: 'pointer' }}
                     />
@@ -728,84 +731,9 @@ export default function AdminDashboard() {
           </Card>
         </Col>
       </Row>
-
-      <style jsx>{`
-        .settings-card {
-          background-color: #f8f9fa;
-          padding: 2rem;
-          border-radius: 8px;
-          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        .d-flex {
-          display: flex;
-          justify-content: space-between;
-        }
-
-        .left-section {
-          width: 40%;
-          padding-right: 2rem;
-        }
-
-        .right-section {
-          width: 60%;
-        }
-
-        .section-title {
-          font-size: 1rem;
-          font-weight: bold;
-          color: white;
-          margin-bottom: 1rem;
-          padding: 0.5rem;
-          text-align: center;
-        }
-
-        .green-background {
-          background: #20df7f;
-          border-radius: 5px;
-          color: #093545;
-        }
-
-        .text-left {
-          text-align: right; /* Alignement à gauche pour tout le texte */
-        }
-
-        .profile-pic {
-          width: 100px;
-          height: 100px;
-          object-fit: cover;
-        }
-
-        .user-name {
-          font-size: 1.1rem;
-          font-weight: bold;
-          margin-top: 0.5rem;
-          color: #083a50;
-        }
-
-        .user-role {
-          color: #6c757d;
-        }
-
-        .edit-profile-btn {
-          background-color: #093545;
-          border: none;
-          padding: 0.5rem 1.5rem;
-          border-radius: 8px;
-          color: white;
-        }
-
-        .separator {
-          width: 1px;
-          background-color: #ddd;
-          margin: 0 2rem;
-          height: auto;
-        }
-      `}</style>
     </Container>
   );
 
-  
   const UserDetailsPage = () => {
     const users = [
       {
@@ -834,20 +762,28 @@ export default function AdminDashboard() {
       },
       // Ajoutez plus d'utilisateurs si nécessaire
     ];
-  
+
     return (
-      <Container fluid className="user-details-container">
+      <Container
+        fluid
+        className="user-details-container"
+      >
         <h3 className="page-title">Utilisateurs</h3>
         <Card className="user-details-card">
-          <Row className='m-0'>
+          <Row className="m-0">
             <h5>Information Générale</h5>
-            <Col md={3} className="user-list p-0">
+            <Col
+              md={3}
+              className="user-list p-0"
+            >
               <h5>Membres</h5>
               <ul className="list-unstyled">
                 {users.map((user, index) => (
                   <li
                     key={index}
-                    className={selectedUser.email === user.email ? 'active' : ''}
+                    className={
+                      selectedUser.email === user.email ? 'active' : ''
+                    }
                     onClick={() => handleUserClick(user)}
                   >
                     {user.prenom} {user.nom}
@@ -855,7 +791,10 @@ export default function AdminDashboard() {
                 ))}
               </ul>
             </Col>
-            <Col md={9} className="user-info">
+            <Col
+              md={9}
+              className="user-info"
+            >
               <Form onSubmit={handleSubmit}>
                 <Row>
                   <Col md={6}>
@@ -884,7 +823,9 @@ export default function AdminDashboard() {
                 <Row>
                   <Col md={6}>
                     <Form.Group className="mb-3">
-                      <Form.Label className="text-start">Date de naissance</Form.Label>
+                      <Form.Label className="text-start">
+                        Date de naissance
+                      </Form.Label>
                       <Form.Control
                         type="date"
                         name="dateNaissance"
@@ -943,7 +884,9 @@ export default function AdminDashboard() {
                   </Col>
                   <Col md={6}>
                     <Form.Group className="mb-3">
-                      <Form.Label className="text-start">Organisation</Form.Label>
+                      <Form.Label className="text-start">
+                        Organisation
+                      </Form.Label>
                       <Form.Control
                         type="text"
                         name="organisation"
@@ -953,7 +896,11 @@ export default function AdminDashboard() {
                     </Form.Group>
                   </Col>
                 </Row>
-                <Button variant="primary" type="submit" className="update-button">
+                <Button
+                  variant="primary"
+                  type="submit"
+                  className="update-button"
+                >
                   Mettre à jour
                 </Button>
               </Form>
@@ -971,16 +918,23 @@ export default function AdminDashboard() {
       </Container>
     );
   };
-  
+
   const ArchivesPage = () => {
     return (
-      <Container fluid className="archives-container">
+      <Container
+        fluid
+        className="archives-container"
+      >
         <h3 className="page-title">Archives</h3>
         <Card className="archives-card">
           <Row>
             <Col md={12}>
               <h5>10 Membres Archivés</h5>
-              <Table striped bordered hover>
+              <Table
+                striped
+                bordered
+                hover
+              >
                 <thead>
                   <tr className="bg-success">
                     <th>Membres</th>
@@ -993,11 +947,17 @@ export default function AdminDashboard() {
                     <td>Selena Roy</td>
                     <td>01/01/2022</td>
                     <td>
-                      <Button variant="link" title="Archiver">
-                        <AiOutlineFolder />
+                      <Button
+                        variant="link"
+                        title="Prévisualiser"
+                      >
+                        <AiOutlineEye  />
                       </Button>
-                      <Button variant="link" title="Prévisualiser">
-                        <AiOutlineEye />
+                      <Button
+                        variant="link"
+                        title="Archiver"
+                      >
+                        <IoArchiveOutline />
                       </Button>
                     </td>
                   </tr>
@@ -1005,23 +965,29 @@ export default function AdminDashboard() {
                     <td>Emma Watson</td>
                     <td>01/01/2022</td>
                     <td>
-                      <Button variant="link" title="Archiver">
-                        <AiOutlineFolder />
+                    <Button
+                        variant="link"
+                        title="Prévisualiser"
+                      >
+                        <AiOutlineEye  />
                       </Button>
-                      <Button variant="link" title="Prévisualiser">
-                        <AiOutlineEye />
+                      <Button
+                        variant="link"
+                        title="Archiver"
+                      >
+                        <IoArchiveOutline />
                       </Button>
                     </td>
                   </tr>
-                  {/* Ajoutez d'autres lignes selon besoin */}
                 </tbody>
               </Table>
             </Col>
           </Row>
           <Row>
-            <Col md={12} className="d-flex justify-content-center">
-              {/* <Button variant="success">Archives</Button> */}
-              {/* Pagination */}
+            <Col
+              md={12}
+              className="d-flex justify-content-center"
+            >
               <Pagination>
                 <Pagination.Prev />
                 <Pagination.Item active>{1}</Pagination.Item>
@@ -1035,85 +1001,108 @@ export default function AdminDashboard() {
       </Container>
     );
   };
-  
 
-  
-const MembresBloques = () => {
- 
-  const membres = [
-    { nom: "Selena Roy", dateDebut: "01/01/2022" },
-    { nom: "Emma Watson", dateDebut: "01/01/2022" },
-    { nom: "John Robert", dateDebut: "01/01/2022" },
-    { nom: "Anne Hathaway", dateDebut: "01/01/2022" },
-    { nom: "Ravi Shankar", dateDebut: "01/01/2022" },
-    { nom: "Emma Stone", dateDebut: "01/01/2022" },
-  ];
+  const MembresBloques = () => {
+    const membres = [
+      { nom: 'Selena Roy', dateDebut: '01/01/2022' },
+      { nom: 'Emma Watson', dateDebut: '01/01/2022' },
+      { nom: 'John Robert', dateDebut: '01/01/2022' },
+      { nom: 'Anne Hathaway', dateDebut: '01/01/2022' },
+      { nom: 'Ravi Shankar', dateDebut: '01/01/2022' },
+      { nom: 'Emma Stone', dateDebut: '01/01/2022' },
+    ];
 
-  const indexOfLastMembre = currentPage * membresParPage;
-  const indexOfFirstMembre = indexOfLastMembre - membresParPage;
-  const currentMembres = membres.slice(indexOfFirstMembre, indexOfLastMembre);
+    const indexOfLastMembre = currentPage * membresParPage;
+    const indexOfFirstMembre = indexOfLastMembre - membresParPage;
+    const currentMembres = membres.slice(indexOfFirstMembre, indexOfLastMembre);
 
-  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+    const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
-  return (
-    <div className="card">
-      <div className="card-header bg-light">
-        <h5 className="card-title mb-0">6 Membres Bloqués</h5>
-      </div>
-      <div className="card-body">
-        <table className="table table-striped">
-          <thead className="bg-success text-white">
-            <tr>
-              <th>Membres</th>
-              <th>Date début</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {currentMembres.map((membre, index) => (
-              <tr key={index}>
-                <td>{membre.nom}</td>
-                <td>{membre.dateDebut}</td>
-                <td>
-                  <button className="btn btn-sm btn-outline-secondary me-2">
-                    <i className="bi bi-eye"></i>
-                  </button>
-                  <button className="btn btn-sm btn-outline-danger">
-                    <i className="bi bi-ban"></i>
-                  </button>
-                </td>
+    return (
+      <div className="card">
+        <div className="card-header bg-light">
+          <h5 className="card-title mb-0">6 Membres Bloqués</h5>
+        </div>
+        <div className="card-body">
+          <table className="table table-striped">
+            <thead className="bg-success text-white">
+              <tr>
+                <th>Membres</th>
+                <th>Date début</th>
+                <th>Actions</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
-        <nav>
-          <ul className="pagination justify-content-center">
-            <li className={`page-item ${currentPage === 1 ? 'disabled' : ''}`}>
-              <button className="page-link" onClick={() => paginate(currentPage - 1)}>
-                Previous
-              </button>
-            </li>
-            {Array.from({ length: Math.ceil(membres.length / membresParPage) }).map((_, index) => (
-              <li key={index} className={`page-item ${currentPage === index + 1 ? 'active' : ''}`}>
-                <button className="page-link" onClick={() => paginate(index + 1)}>
-                  {index + 1}
+            </thead>
+            <tbody>
+              {currentMembres.map((membre, index) => (
+                <tr key={index}>
+                  <td>{membre.nom}</td>
+                  <td>{membre.dateDebut}</td>
+                  <td>
+                    <button className="btn btn-sm btn-outline-secondary me-2">
+                    <IoEyeSharp />
+
+                      {/* <i className="bi bi-eye"></i> */}
+                    </button>
+                    <button className="btn btn-sm btn-outline-danger">
+                      {/* <i className="bi bi-ban"></i> */}
+                      <MdBlockFlipped />
+
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          <nav>
+            <ul className="pagination justify-content-center">
+              <li
+                className={`page-item ${currentPage === 1 ? 'disabled' : ''}`}
+              >
+                <button
+                  className="page-link"
+                  onClick={() => paginate(currentPage - 1)}
+                >
+                  Previous
                 </button>
               </li>
-            ))}
-            <li className={`page-item ${currentPage === Math.ceil(membres.length / membresParPage) ? 'disabled' : ''}`}>
-              <button className="page-link" onClick={() => paginate(currentPage + 1)}>
-                Next
-              </button>
-            </li>
-          </ul>
-        </nav>
+              {Array.from({
+                length: Math.ceil(membres.length / membresParPage),
+              }).map((_, index) => (
+                <li
+                  key={index}
+                  className={`page-item ${
+                    currentPage === index + 1 ? 'active' : ''
+                  }`}
+                >
+                  <button
+                    className="page-link"
+                    onClick={() => paginate(index + 1)}
+                  >
+                    {index + 1}
+                  </button>
+                </li>
+              ))}
+              <li
+                className={`page-item ${
+                  currentPage === Math.ceil(membres.length / membresParPage)
+                    ? 'disabled'
+                    : ''
+                }`}
+              >
+                <button
+                  className="page-link"
+                  onClick={() => paginate(currentPage + 1)}
+                >
+                  Next
+                </button>
+              </li>
+            </ul>
+          </nav>
+        </div>
       </div>
-    </div>
-  );
-};
+    );
+  };
 
-  
-  
   const renderContent = () => {
     switch (activeItem) {
       case 'Dashboard':
@@ -1127,7 +1116,7 @@ const MembresBloques = () => {
       case 'Paramètres généraux': // Cas pour Paramètres généraux
         return renderParametersPage();
       case 'Utilisateurs Paramètre': // Cas pour Utilisateurs du dropdown Paramètres
-        return  UserDetailsPage();
+        return UserDetailsPage();
       case 'Archivés':
         return ArchivesPage();
       case 'Membres bloqués':
@@ -1136,7 +1125,6 @@ const MembresBloques = () => {
         return <div>Contenu non disponible</div>;
     }
   };
-  
 
   return (
     <div className="admin-dashboard">
@@ -1161,43 +1149,63 @@ const MembresBloques = () => {
                 <span>{label}</span>
               </li>
             ))}
-           <li className={`dropdown ${isSettingsOpen ? 'active' : ''}`}>
-  <div
-    onClick={() => handleItemClick('Paramètres')}
-    className="dropdown-header"
-  >
-    <Settings size={20} />
-    <span>Paramètres</span>
-    <ChevronDown size={16} className={`dropdown-icon ${isSettingsOpen ? 'open' : ''}`} />
-  </div>
-</li>
-{isSettingsOpen && (
-  <ul className="dropdown-content">
-    <li onClick={() => handleItemClick('Paramètres généraux')}>Paramètres généraux</li>
-    <li onClick={() => handleItemClick('Utilisateurs Paramètre')}>Utilisateurs</li>
-    <li onClick={() => handleItemClick('Archivés')}>Archivés</li>
-    <li onClick={() => handleItemClick('Membres bloqués')}>Membres bloqués</li>
-  </ul>
-)}
-</ul>
+            <li className={`dropdown ${isSettingsOpen ? 'active' : ''}`}>
+              <div
+                onClick={() => handleItemClick('Paramètres')}
+                className="dropdown-header"
+              >
+                <Settings size={20} />
+                <span>Paramètres</span>
+                <ChevronDown
+                  size={16}
+                  className={`dropdown-icon ${isSettingsOpen ? 'open' : ''}`}
+                />
+              </div>
+            </li>
+            {isSettingsOpen && (
+              <ul className="dropdown-content">
+                <li onClick={() => handleItemClick('Paramètres généraux')}>
+                  Paramètres généraux
+                </li>
+                <li onClick={() => handleItemClick('Utilisateurs Paramètre')}>
+                  Utilisateurs
+                </li>
+                <li onClick={() => handleItemClick('Archivés')}>Archivés</li>
+                <li onClick={() => handleItemClick('Membres bloqués')}>
+                  Membres bloqués
+                </li>
+              </ul>
+            )}
+          </ul>
         </aside>
-  
+
         <div className="main-section">
           <nav className="navbar">
             <h1 className="navbar-title">{activeItem}</h1>
             <div className="user-info">
               {/* Existing Notification and User Dropdown */}
               <Dropdown>
-                <Dropdown.Toggle as={CustomToggle} id="notification-dropdown">
+                <Dropdown.Toggle
+                  as={CustomToggle}
+                  id="notification-dropdown"
+                >
                   <div className="notification-icon-wrapper">
-                    <Bell size={20} className="notification-icon" />
+                    <Bell
+                      size={20}
+                      className="notification-icon"
+                    />
                     <span className="notification-badge">1</span>
                   </div>
                 </Dropdown.Toggle>
-                <Dropdown.Menu align="end" className="notification-menu">
+                <Dropdown.Menu
+                  align="end"
+                  className="notification-menu"
+                >
                   <Dropdown.Item>
                     <div className="notification-item">
-                      <span className="notification-title">Nouvelle cotisation</span>
+                      <span className="notification-title">
+                        Nouvelle cotisation
+                      </span>
                       <span className="notification-time">Il y a 2 heures</span>
                     </div>
                   </Dropdown.Item>
@@ -1210,287 +1218,42 @@ const MembresBloques = () => {
                 </Dropdown.Menu>
               </Dropdown>
               <div className="user-details">
-                <img src={profil} alt="User" className="user-avatar" />
+                <img
+                  src={profil}
+                  alt="User"
+                  className="user-avatar"
+                />
                 <div className="user-info-text">
                   <span className="user-name">Ndiaga SALL</span>
                   <span className="user-role">Administrator</span>
                 </div>
                 <Dropdown>
-                  <Dropdown.Toggle as={CustomToggle} id="user-dropdown">
-                    <ChevronDown size={16} className="dropdown-icon" />
+                  <Dropdown.Toggle
+                    as={CustomToggle}
+                    id="user-dropdown"
+                  >
+                    <ChevronDown
+                      size={16}
+                      className="dropdown-icon"
+                    />
                   </Dropdown.Toggle>
                   <Dropdown.Menu align="end">
                     <Dropdown.Item>Profile</Dropdown.Item>
                     <Dropdown.Item>Paramètres</Dropdown.Item>
                     <Dropdown.Divider />
-                    <Dropdown.Item className="text-danger">Déconnexion</Dropdown.Item>
+                    <Dropdown.Item className="text-danger">
+                      Déconnexion
+                    </Dropdown.Item>
                   </Dropdown.Menu>
                 </Dropdown>
               </div>
             </div>
           </nav>
-  
-          <main className="main-content">
-            {renderContent()}
-          </main>
+
+          <main className="main-content">{renderContent()}</main>
         </div>
       </div>
-  
-      <style jsx>{`
-        .admin-dashboard {
-          display: flex;
-          height: 100vh;
-        }
-  
-        .dashboard-content {
-          display: flex;
-          flex-direction: row;
-          width: 100%;
-        }
-  
-        .sidebar {
-          width: 250px;
-          background-color: #1e293b;
-          color: white;
-          padding: 1rem;
-          display: flex;
-          flex-direction: column;
-          height: 100vh;
-        }
-  
-        .main-section {
-          display: flex;
-          flex-direction: column;
-          flex-grow: 1;
-        }
-  
-        .dropdown {
-          position: relative;
-        }
-  
-        .dropdown-header {
-          display: flex;
-          align-items: center;
-          cursor: pointer;
-        }
-  
-        .dropdown-content {
-          margin-top: 0.5rem;
 
-          background-color: #374151;
-          border-radius: 5px;
-          list-style: none;
-          padding: 0;
-          position: absolute;
-          margin-top:20
-          width: 100%;
-        }
-  
-        .dropdown-content li {
-          padding: 0.5rem;
-          cursor: pointer;
-          color: white;
-          margin: bottom
-        }
-  
-        .dropdown-content li:hover {
-          background-color: #475569;
-        }
-  
-        .navbar {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          background-color: white;
-          padding: 1rem;
-          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-          width: 100%;
-        }
-  
-        .navbar-title {
-          font-size: 1.5rem;
-          font-weight: bold;
-          margin: 0;
-        }
-  
-        .user-info {
-          display: flex;
-          align-items: center;
-          gap: 1rem;
-        }
-  
-        .notification-badge {
-          position: absolute;
-          top: -5px;
-          right: -5px;
-          background-color: #1abc9c;
-          color: white;
-          border-radius: 50%;
-          padding: 1px 5px;
-          font-size: 0.75rem;
-        }
-  
-        .user-details {
-          display: flex;
-          align-items: center;
-        }
-                  .summary-card {
-          height: 70%;
-          border: none;
-          border-radius: 8px;
-          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        .chart-card {
-          border: none;
-          border-radius: 8px;
-          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        .equal-height {
-          min-height: 100%;
-          display: flex;
-          flex-direction: column;
-        }
-
-        .chart-title {
-          font-size: 0.875rem;
-          font-weight: 600;
-          color: white;
-          background-color: #10b981;
-          padding: 0.5rem 1rem;
-          border-top-left-radius: 8px;
-          border-top-right-radius: 8px;
-          margin: 0;
-        }
-
-        .custom-progress {
-          height: 1rem;
-          border-radius: 5px;
-        }
-
-        .table-title {
-          font-size: 1rem;
-          font-weight: bold;
-          color: #6c757d;
-          margin-bottom: 1rem;
-        }
-
-        .pie-legend {
-          display: flex;
-          justify-content: space-between;
-          margin-top: 20px;
-        }
-
-        .legend-item {
-          display: flex;
-          align-items: center;
-          margin-right: 15px;
-        }
-
-        .legend-color {
-          width: 15px;
-          height: 15px;
-          border-radius: 50%;
-          margin-right: 5px;
-        }
-
-        .legend-label {
-          font-size: 14px;
-          color: #333;
-        }
-           /* ... (autres styles) ... */
-  .dropdown-icon {
-    transition: transform 0.3s ease;
-  }
-  .dropdown-icon.open {
-    transform: rotate(180deg);
-  }
-  .dropdown-content {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    background-color: #2c3e50;
-  }
-  .dropdown-content li {
-    padding: 0.5rem 1rem 0.5rem 2.5rem;
-    cursor: pointer;
-  }
-  .dropdown-content li:hover {
-    background-color: #34495e;
-  }
-
- .user-details-container {
-  padding: 20px;
-  background-color: #f8f9fa;
-}
-
-.page-title {
-  font-size: 24px;
-  font-weight: bold;
-  margin-bottom: 20px;
-  text-align: left;
-  color: #000;
-  box-shadow: none; /* Pas d'ombre pour le titre */
-}
-
-.user-details-card {
-  background-color: #fff;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  padding: 20px;
-  border: none;
-}
-
-.user-list {
-  border-right: 1px solid #e0e0e0;
-  padding-right: 20px;
-}
-
-.user-list h5 {
-  color: #333;
-  margin-bottom: 15px;
-}
-
-.user-list ul {
-  list-style-type: none;
-  padding-left: 0;
-}
-
-.user-list li {
-  padding: 10px 0;
-  cursor: pointer;
-  transition: background-color 0.2s;
-}
-
-.user-list li.active,
-.user-list li:hover {
-  background-color: #00bfa6;
-  color: #fff;
-}
-
-.user-info h5 {
-  margin-bottom: 20px;
-  color: #333;
-}
-
-.update-button {
-  background-color: #093545; /* Couleur de fond du bouton */
-  border: none; /* Supprimer la bordure */
-  padding: 10px 20px; /* Espacement interne */
-  color: #FFFFFF; /* Couleur du texte */
-  float: right; /* Positionner le bouton à droite */
-  border-radius: 8px; /* Arrondi des coins du bouton */
-  cursor: pointer; /* Changer le curseur au survol */
-}
-
-
-.update-button:hover {
-  background-color: #008f7a;
-}
-
-
-      `}</style>
     </div>
   );
-}  
+}
