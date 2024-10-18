@@ -97,9 +97,15 @@ export default function AdminDashboard() {
   });
 
   const [formData, setFormData] = useState(selectedUser);
-  const toggleMobileMenu = () => {
-    setIsMobileMenuOpen(!isMobileMenuOpen);
-  };
+  // const toggleMobileMenu = () => {
+  //   setIsMobileMenuOpen(!isMobileMenuOpen);
+  // };
+
+  function toggleSidebar() {
+    const sidebar = document.getElementById('sidebar');
+    sidebar.classList.toggle('open');
+  }
+  
   const handleUserClick = (user) => {
     setSelectedUser(user);
     setFormData(user);
@@ -159,7 +165,9 @@ export default function AdminDashboard() {
     } else {
       setIsSettingsOpen(false);
     }
+    setIsMobileMenuOpen(false);
   };
+
 
   const toggleAddForm = () => {
     setShowAddForm(!showAddForm);
@@ -1180,7 +1188,7 @@ export default function AdminDashboard() {
   return (
     <div className="admin-dashboard">
       <div className="dashboard-content">
-      <aside className={`sidebar ${isMobileMenuOpen ? 'mobile-open' : ''}`}>
+      <aside className="sidebar">
 
           <div className="sidebar-header">
             <Wallet size={24} />
@@ -1233,9 +1241,10 @@ export default function AdminDashboard() {
 
         <div className="main-section">
           <nav className="navbar">
-          <button className="mobile-menu-toggle" onClick={toggleMobileMenu}>
-            ☰
-          </button>
+          <button className="toggle-sidebar-btn" onClick={toggleSidebar}>
+          &#9776; {/* Icône du hamburger */}
+        </button>
+
             <h1 className="navbar-title">{activeItem}</h1>
             <div className="user-info">
               {/* Existing Notification and User Dropdown */}
