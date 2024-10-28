@@ -80,8 +80,51 @@ const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
 export default function AdminDashboard() {
   const [activeItem, setActiveItem] = useState('Dashboard');
   const [showAddForm, setShowAddForm] = useState(false);
+  // const [activeItem, setActiveItem] = useState('Dashboard');
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true); // État pour gérer l'affichage de la sidebar
+
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+
+  const handleItemClick = (label) => {
+    setActiveItem(label);
+    if (label === 'Paramètres') {
+      setIsSettingsOpen((prev) => !prev); // Ouvre/ferme les paramètres si cliqué
+    } else {
+      setIsSettingsOpen(false); // Ferme les paramètres si un autre élément est cliqué
+    }
+    setSidebarOpen(false); // Ferme la sidebar après le clic
+  };
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      const sidebar = document.querySelector('.sidebar');
+      const toggleButton = document.querySelector('.toggle-sidebar-btn');
+      
+      if (sidebar && !sidebar.contains(event.target) && !toggleButton.contains(event.target)) {
+        setSidebarOpen(false); // Ferme la sidebar si on clique en dehors
+      }
+    };
+
+    document.addEventListener('click', handleClickOutside);
+    
+    // Nettoyer l'écouteur d'événements quand le composant est démonté
+    return () => {
+      document.removeEventListener('click', handleClickOutside);
+    };
+  }, []);
+
+  const toggleSidebar = () => {
+    setSidebarOpen((prev) => !prev); // Inverse l'état de la sidebar
+  };
+
+  const handleSidebarToggle = () => {
+    setIsSidebarOpen(!isSidebarOpen); // Toggle pour ouvrir/fermer la sidebar
+  };
+
+  const handleSidebarItemClick = () => {
+    setIsSidebarOpen(false); // Fermer la sidebar lors du clic sur un élément
+  };
 
   const [selectedUser, setSelectedUser] = useState({
     nom: 'Selena',
@@ -96,15 +139,9 @@ export default function AdminDashboard() {
     confirmMotDePasse: '********',
   });
 
-  const [formData, setFormData] = useState(selectedUser);
-  // const toggleMobileMenu = () => {
-  //   setIsMobileMenuOpen(!isMobileMenuOpen);
-  // };
 
-  function toggleSidebar() {
-    const sidebar = document.getElementById('sidebar');
-    sidebar.classList.toggle('open');
-  }
+  const [formData, setFormData] = useState(selectedUser);
+
   
   const handleUserClick = (user) => {
     setSelectedUser(user);
@@ -157,16 +194,6 @@ export default function AdminDashboard() {
       status: 'En cours',
     },
   ]);
-
-  const handleItemClick = (item) => {
-    setActiveItem(item);
-    if (item === 'Paramètres') {
-      setIsSettingsOpen(!isSettingsOpen);
-    } else {
-      setIsSettingsOpen(false);
-    }
-    setIsMobileMenuOpen(false);
-  };
 
 
   const toggleAddForm = () => {
@@ -1186,9 +1213,9 @@ export default function AdminDashboard() {
   };
 
   return (
-    <div className="admin-dashboard">
+    <div className={`admin-dashboard ${sidebarOpen ? 'sidebar-open' : 'sidebar-closed'}`}>
       <div className="dashboard-content">
-      <aside className="sidebar">
+      <aside className={`sidebar ${sidebarOpen ? 'open' : ''}`}>
 
           <div className="sidebar-header">
             <Wallet size={24} />
@@ -1203,13 +1230,17 @@ export default function AdminDashboard() {
               <li
                 key={label}
                 className={activeItem === label ? 'active' : ''}
-                onClick={() => handleItemClick(label)}
+                onClick={() => {
+                  handleItemClick(label); // S'assure que label est défini
+                  toggleSidebar(); // Ferme la sidebar après le clic
+                }}
               >
                 <Icon size={20} />
                 <span>{label}</span>
               </li>
             ))}
-            <li className={`dropdown ${isSettingsOpen ? 'active' : ''}`}>
+            <li className={`dropdown ${isSettingsOpen ? 'active' : ''}`}
+                >
               <div
                 onClick={() => handleItemClick('Paramètres')}
                 className="dropdown-header"
@@ -1241,9 +1272,13 @@ export default function AdminDashboard() {
 
         <div className="main-section">
           <nav className="navbar">
-          <button className="toggle-sidebar-btn" onClick={toggleSidebar}>
-          &#9776; {/* Icône du hamburger */}
-        </button>
+          <button className="toggle-sidebar-btn" onClick={() => {
+    console.log('Button clicked'); // Ajoute ce log
+    toggleSidebar();
+}}>
+    &#9776; {/* Icône du hamburger */}
+</button>
+
 
             <h1 className="navbar-title">{activeItem}</h1>
             <div className="user-info">
@@ -1313,7 +1348,6 @@ export default function AdminDashboard() {
               </div>
             </div>
           </nav>
-
           <main className="main-content">{renderContent()}</main>
         </div>
       </div>
