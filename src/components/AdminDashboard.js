@@ -1,14 +1,12 @@
-import React, { useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import profil from '../images/profile.png';
 import { Pagination, Form } from 'react-bootstrap'; // Ajout de Form ici
 import { AiOutlineFolder, AiOutlineEye } from 'react-icons/ai'; // Import des icônes d'archives et de prévisualisation
 import { IoEyeSharp } from 'react-icons/io5';
 import { MdBlockFlipped } from 'react-icons/md';
 import { IoArchiveOutline } from 'react-icons/io5';
-import { MdCircle } from "react-icons/md";
+import { MdCircle } from 'react-icons/md';
 // import { MdBlock } from "react-icons/md";
-
-
 
 import {
   Dropdown,
@@ -77,7 +75,7 @@ const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
   </div>
 ));
 
-export default function AdminDashboard() {
+export default function AdminDashboard() {;
   const [activeItem, setActiveItem] = useState('Dashboard');
   const [showAddForm, setShowAddForm] = useState(false);
   // const [activeItem, setActiveItem] = useState('Dashboard');
@@ -100,14 +98,18 @@ export default function AdminDashboard() {
     const handleClickOutside = (event) => {
       const sidebar = document.querySelector('.sidebar');
       const toggleButton = document.querySelector('.toggle-sidebar-btn');
-      
-      if (sidebar && !sidebar.contains(event.target) && !toggleButton.contains(event.target)) {
+
+      if (
+        sidebar &&
+        !sidebar.contains(event.target) &&
+        !toggleButton.contains(event.target)
+      ) {
         setSidebarOpen(false); // Ferme la sidebar si on clique en dehors
       }
     };
 
     document.addEventListener('click', handleClickOutside);
-    
+
     // Nettoyer l'écouteur d'événements quand le composant est démonté
     return () => {
       document.removeEventListener('click', handleClickOutside);
@@ -139,10 +141,8 @@ export default function AdminDashboard() {
     confirmMotDePasse: '********',
   });
 
-
   const [formData, setFormData] = useState(selectedUser);
 
-  
   const handleUserClick = (user) => {
     setSelectedUser(user);
     setFormData(user);
@@ -194,7 +194,6 @@ export default function AdminDashboard() {
       status: 'En cours',
     },
   ]);
-
 
   const toggleAddForm = () => {
     setShowAddForm(!showAddForm);
@@ -334,47 +333,55 @@ export default function AdminDashboard() {
         </Col>
       </Row>
 
-  <div className="row my-4">
-  {/* Tableau Juin */}
-  <div className="col-md-6">
-    <h5 className="table-title">Juin</h5>
-    <div className="card mb-4 no-extra-card p-0">
-      <div className="card-body">
-        <table className="table custom-table">
-          <thead>
-            <tr>
-              <th>Membres</th>
-              <th>Montant</th>
-              <th>Date</th>
-              <th>Statut</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Selena Roy</td>
-              <td>25.000 FCFA</td>
-              <td>01-06-2022</td>
-              <td><span className="text-success">Validé</span></td>
-            </tr>
-            <tr>
-              <td>Emma Watson</td>
-              <td>25.000 FCFA</td>
-              <td>01-06-2022</td>
-              <td><span className="text-primary">En attente</span></td>
-            </tr>
-            <tr>
-              <td>Jhon Robert</td>
-              <td>25.000 FCFA</td>
-              <td>01-06-2022</td>
-              <td><span className="text-success">Validé</span></td>
-            </tr>
-            <tr>
-              <td>Anne Hathaway</td>
-              <td>25.000 FCFA</td>
-              <td>01-06-2022</td>
-              <td><span className="text-grey">En attente</span></td>
-            </tr>
-            {/* <tr>
+      <div className="row my-4">
+        {/* Tableau Juin */}
+        <div className="col-md-6">
+          <h5 className="table-title">Juin</h5>
+          <div className="card mb-4 no-extra-card p-0">
+            <div className="card-body">
+              <table className="table custom-table">
+                <thead>
+                  <tr>
+                    <th>Membres</th>
+                    <th>Montant</th>
+                    <th>Date</th>
+                    <th>Statut</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Selena Roy</td>
+                    <td>25.000 FCFA</td>
+                    <td>01-06-2022</td>
+                    <td>
+                      <span className="text-success">Validé</span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Emma Watson</td>
+                    <td>25.000 FCFA</td>
+                    <td>01-06-2022</td>
+                    <td>
+                      <span className="text-primary">En attente</span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Jhon Robert</td>
+                    <td>25.000 FCFA</td>
+                    <td>01-06-2022</td>
+                    <td>
+                      <span className="text-success">Validé</span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Anne Hathaway</td>
+                    <td>25.000 FCFA</td>
+                    <td>01-06-2022</td>
+                    <td>
+                      <span className="text-grey">En attente</span>
+                    </td>
+                  </tr>
+                  {/* <tr>
               <td>Ravi Shankar</td>
               <td>25.000 FCFA</td>
               <td>01-06-2022</td>
@@ -386,86 +393,116 @@ export default function AdminDashboard() {
               <td>01-06-2022</td>
               <td><span className="text-success">Validé</span></td>
             </tr> */}
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </div>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
 
-  {/* Tableau Top Progression */}
-  <div className="col-md-6">
-    <h5 className="table-title">Top progression</h5>
-    <div className="card mb-4 no-extra-card">
-      <div className="card-body">
-        <table className="table custom-table">
-          <thead className="bg-success text-white">
-            <tr>
-              <th>Membres</th>
-              <th>Date début</th>
-              <th>Progression</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Selena Roy</td>
-              <td>01-06-2022</td>
-              <td>
-                <div className="progress-bar-container">
-                  <div className="progress-v success" style={{ width: "100%" }}>100%</div>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td>Jhon Robert</td>
-              <td>01-06-2022</td>
-              <td>
-                <div className="progress-bar-container">
-                  <div className="progress-v success" style={{ width: "100%" }}>100%</div>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td>Emma Stone</td>
-              <td>01-06-2022</td>
-              <td>
-                <div className="progress-bar-container">
-                  <div className="progress-v info" style={{ width: "64%" }}>64%</div>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td>Emma Watson</td>
-              <td>01-06-2022</td>
-              <td>
-                <div className="progress-bar-container">
-                  <div className="progress-v info" style={{ width: "57%" }}>57%</div>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td>Anne Hathaway</td>
-              <td>01-06-2022</td>
-              <td>
-                <div className="progress-bar-container">
-                  <div className="progress-v info" style={{ width: "50%" }}>50%</div>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td>Ravi Shankar</td>
-              <td>01-06-2022</td>
-              <td>
-                <div className="progress-bar-container">
-                  <div className="progress-v info" style={{ width: "50%" }}>50%</div>
-                </div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+        {/* Tableau Top Progression */}
+        <div className="col-md-6">
+          <h5 className="table-title">Top progression</h5>
+          <div className="card mb-4 no-extra-card">
+            <div className="card-body">
+              <table className="table custom-table">
+                <thead className="bg-success text-white">
+                  <tr>
+                    <th>Membres</th>
+                    <th>Date début</th>
+                    <th>Progression</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Selena Roy</td>
+                    <td>01-06-2022</td>
+                    <td>
+                      <div className="progress-bar-container">
+                        <div
+                          className="progress-v success"
+                          style={{ width: '100%' }}
+                        >
+                          100%
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Jhon Robert</td>
+                    <td>01-06-2022</td>
+                    <td>
+                      <div className="progress-bar-container">
+                        <div
+                          className="progress-v success"
+                          style={{ width: '100%' }}
+                        >
+                          100%
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Emma Stone</td>
+                    <td>01-06-2022</td>
+                    <td>
+                      <div className="progress-bar-container">
+                        <div
+                          className="progress-v info"
+                          style={{ width: '64%' }}
+                        >
+                          64%
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Emma Watson</td>
+                    <td>01-06-2022</td>
+                    <td>
+                      <div className="progress-bar-container">
+                        <div
+                          className="progress-v info"
+                          style={{ width: '57%' }}
+                        >
+                          57%
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Anne Hathaway</td>
+                    <td>01-06-2022</td>
+                    <td>
+                      <div className="progress-bar-container">
+                        <div
+                          className="progress-v info"
+                          style={{ width: '50%' }}
+                        >
+                          50%
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Ravi Shankar</td>
+                    <td>01-06-2022</td>
+                    <td>
+                      <div className="progress-bar-container">
+                        <div
+                          className="progress-v info"
+                          style={{ width: '50%' }}
+                        >
+                          50%
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
-</div>
 
       <Row className="mt-4">
         <Col>
@@ -486,7 +523,7 @@ export default function AdminDashboard() {
     </Container>
   );
 
-  const renderUsersPage = () => { 
+  const renderUsersPage = () => {
     const users = [
       {
         id: 1,
@@ -540,47 +577,50 @@ export default function AdminDashboard() {
 
     return (
       <div className="users-page">
-  <div class="row mb-3">
-  <div class="col-md-4">
-    <div class="card card-vert">
-      <div class="card-body d-flex justify-content-center gap-3">
-        <div>
-          <h5 class="text-white">Membres Actifs</h5>
-          <p class="text-white">94 Membres</p>
+        <div class="row mb-3">
+          <div class="col-md-4">
+            <div class="card card-vert">
+              <div class="card-body d-flex justify-content-center gap-3">
+                <div>
+                  <h5 class="text-white">Membres Actifs</h5>
+                  <p class="text-white">94 Membres</p>
+                </div>
+                <MdCircle />
+
+                {/* <i class="fas fa-user-check icon-active"></i>  */}
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="card">
+              <div class="card-body d-flex justify-content-center gap-3">
+                <div>
+                  <h5>Membres Bloqués</h5>
+                  <p>6 Membres</p>
+                </div>
+                {/* <MdBlockFlipped /> */}
+
+                {/* <MdBlock /> */}
+                {/* <i class="fas fa-user-slash icon-bloque"></i>. */}
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="card">
+              <div class="card-body">
+                <h5>Total Effectif</h5>
+                <p>100 Membres</p>
+              </div>
+              <AddUserForm
+                show={showAddForm}
+                onHide={toggleAddForm}
+                onAdd={addUser}
+              />
+            </div>
+          </div>
         </div>
-          <MdCircle />
-
-        {/* <i class="fas fa-user-check icon-active"></i>  */}
-      </div>
-    </div>
-  </div>
-
-  <div class="col-md-4">
-    <div class="card">
-      <div class="card-body d-flex justify-content-center gap-3">
-        <div>
-          <h5>Membres Bloqués</h5>
-          <p>6 Membres</p>
-        </div>
-        {/* <MdBlockFlipped /> */}
-
-        {/* <MdBlock /> */}
-        {/* <i class="fas fa-user-slash icon-bloque"></i>. */}
-      </div>
-    </div>
-  </div>
-
-  <div class="col-md-4">
-    <div class="card">
-      <div class="card-body">
-        <h5>Total Effectif</h5>
-        <p>100 Membres</p>
-      </div>
-      <AddUserForm show={showAddForm} onHide={toggleAddForm} onAdd={addUser} />
-    </div>
-  </div>
-</div>
-
 
         <Row className="d-flex justify-content-end">
           <Button
@@ -637,7 +677,6 @@ export default function AdminDashboard() {
                     <MdBlockFlipped size={18} />
                   </td>
                 </tr>
-                
               ))}
             </tbody>
           </table>
@@ -661,33 +700,87 @@ export default function AdminDashboard() {
       { id: 3, name: 'Jhon Robert', startDate: '01/01/2022' },
       { id: 4, name: 'Anne Hathaway', startDate: '01/01/2022' },
     ];
-  
+
     return (
       <div className="container-fluid">
         {/* Cartes récapitulatives */}
         <div className="row mb-4">
           <div className="col-md-4">
-            <div className="card summary-card text-center" style={{ border: 'none', backgroundColor: '#f8f9fa' }}>
+            <div
+              className="card summary-card text-center"
+              style={{ border: 'none', backgroundColor: '#f8f9fa' }}
+            >
               <div className="card-body">
-                <h5 className="card-title" style={{ color: '#093545' }}>Juin</h5>
-                <p className="amount" style={{ fontSize: '1.5rem', fontWeight: 'bold', color: '#093545' }}>225.000 FCFA</p>
+                <h5
+                  className="card-title"
+                  style={{ color: '#093545' }}
+                >
+                  Juin
+                </h5>
+                <p
+                  className="amount"
+                  style={{
+                    fontSize: '1.5rem',
+                    fontWeight: 'bold',
+                    color: '#093545',
+                  }}
+                >
+                  225.000 FCFA
+                </p>
               </div>
             </div>
           </div>
           <div className="col-md-4">
-            <div className="card summary-card text-center" style={{ border: 'none', backgroundColor: '#f8f9fa' }}>
+            <div
+              className="card summary-card text-center"
+              style={{ border: 'none', backgroundColor: '#f8f9fa' }}
+            >
               <div className="card-body">
-                <h5 className="card-title" style={{ color: '#093545' }}>Mai</h5>
-                <p className="amount" style={{ fontSize: '1.5rem', fontWeight: 'bold', color: '#093545' }}>100.000 FCFA</p>
+                <h5
+                  className="card-title"
+                  style={{ color: '#093545' }}
+                >
+                  Mai
+                </h5>
+                <p
+                  className="amount"
+                  style={{
+                    fontSize: '1.5rem',
+                    fontWeight: 'bold',
+                    color: '#093545',
+                  }}
+                >
+                  100.000 FCFA
+                </p>
               </div>
             </div>
           </div>
           <div className="col-md-4">
-            <div className="card summary-card text-center" style={{ border: 'none', backgroundColor: '#f8f9fa' }}>
+            <div
+              className="card summary-card text-center"
+              style={{ border: 'none', backgroundColor: '#f8f9fa' }}
+            >
               <div className="card-body">
-                <h5 className="card-title" style={{ color: '#093545' }}>Total Caisse</h5>
-                <p className="amount" style={{ fontSize: '20px', fontWeight: 'bold', color: '#093545' }}>3.500.000 FCFA</p>
-                <div className="progress" style={{ height: '8px' }}>
+                <h5
+                  className="card-title"
+                  style={{ color: '#093545' }}
+                >
+                  Total Caisse
+                </h5>
+                <p
+                  className="amount"
+                  style={{
+                    fontSize: '20px',
+                    fontWeight: 'bold',
+                    color: '#093545',
+                  }}
+                >
+                  3.500.000 FCFA
+                </p>
+                <div
+                  className="progress"
+                  style={{ height: '8px' }}
+                >
                   <div
                     className="progress-bar"
                     role="progressbar"
@@ -695,46 +788,47 @@ export default function AdminDashboard() {
                     aria-valuenow="77"
                     aria-valuemin="0"
                     aria-valuemax="100"
-                  >                   
-                  </div>
+                  ></div>
                 </div>
-                <p className='text-end fs-6'>
-                <span style={{color : '#093545' }}> 77% du seuil</span>
+                <p className="text-end fs-6">
+                  <span style={{ color: '#093545' }}> 77% du seuil</span>
                 </p>
-
               </div>
             </div>
           </div>
         </div>
-  
+
         <div className="card custom-card">
-        <div className="card-body p-0">
-          <table className="table table-responsive custom-table">
-            <thead className="custom-thead">
-              <tr>
-                <th>Membres</th>
-                <th>Date début</th>
-                <th>Montant cotisé</th>
-                <th>Montant restant</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {users.map((user) => (
-                <tr key={user.id}>
-                  <td>{user.name}</td>
-                  <td>{user.startDate}</td>
-                  <td>200.000 FCFA</td>
-                  <td>100.000 FCFA</td>
-                  <td>
-                    <AiOutlineEye size={18} style={{ cursor: 'pointer' }} />
-                  </td>
+          <div className="card-body p-0">
+            <table className="table table-responsive custom-table">
+              <thead className="custom-thead">
+                <tr>
+                  <th>Membres</th>
+                  <th>Date début</th>
+                  <th>Montant cotisé</th>
+                  <th>Montant restant</th>
+                  <th>Actions</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {users.map((user) => (
+                  <tr key={user.id}>
+                    <td>{user.name}</td>
+                    <td>{user.startDate}</td>
+                    <td>200.000 FCFA</td>
+                    <td>100.000 FCFA</td>
+                    <td>
+                      <AiOutlineEye
+                        size={18}
+                        style={{ cursor: 'pointer' }}
+                      />
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
-      </div>
       </div>
     );
   };
@@ -1213,10 +1307,13 @@ export default function AdminDashboard() {
   };
 
   return (
-    <div className={`admin-dashboard ${sidebarOpen ? 'sidebar-open' : 'sidebar-closed'}`}>
+    <div
+      className={`admin-dashboard ${
+        sidebarOpen ? 'sidebar-open' : 'sidebar-closed'
+      }`}
+    >
       <div className="dashboard-content">
-      <aside className={`sidebar ${sidebarOpen ? 'open' : ''}`}>
-
+        <aside className={`sidebar ${sidebarOpen ? 'open' : ''}`}>
           <div className="sidebar-header">
             <Wallet size={24} />
             <span>Bakéli Tontine</span>
@@ -1231,16 +1328,15 @@ export default function AdminDashboard() {
                 key={label}
                 className={activeItem === label ? 'active' : ''}
                 onClick={() => {
-                  handleItemClick(label); // S'assure que label est défini
-                  toggleSidebar(); // Ferme la sidebar après le clic
+                  handleItemClick(label);
+                  toggleSidebar();
                 }}
               >
                 <Icon size={20} />
                 <span>{label}</span>
               </li>
             ))}
-            <li className={`dropdown ${isSettingsOpen ? 'active' : ''}`}
-                >
+            <li className={`dropdown ${isSettingsOpen ? 'active' : ''}`}>
               <div
                 onClick={() => handleItemClick('Paramètres')}
                 className="dropdown-header"
@@ -1272,17 +1368,18 @@ export default function AdminDashboard() {
 
         <div className="main-section">
           <nav className="navbar">
-          <button className="toggle-sidebar-btn" onClick={() => {
-    console.log('Button clicked'); // Ajoute ce log
-    toggleSidebar();
-}}>
-    &#9776; {/* Icône du hamburger */}
-</button>
-
+            <button
+              className="toggle-sidebar-btn"
+              onClick={() => {
+                console.log('Button clicked');
+                toggleSidebar();
+              }}
+            >
+              &#9776; {/* Icône du hamburger */}
+            </button>
 
             <h1 className="navbar-title">{activeItem}</h1>
             <div className="user-info">
-              {/* Existing Notification and User Dropdown */}
               <Dropdown>
                 <Dropdown.Toggle
                   as={CustomToggle}

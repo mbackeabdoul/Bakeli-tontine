@@ -6,7 +6,7 @@ import LoginForm from './components/LoginForm';
 import ForgotPasswordForm from './components/ForgotPasswordForm';
 import AdminDashboard from './components/AdminDashboard';
 import AddUserForm from './components/AddUserForm';
-import SettingsPage from './components/Settings'; // Assure-toi que le chemin est correct
+// import SettingsPage from './components/Settings'; // Assure-toi que le chemin est correct 
 
 function App() {
   return (
@@ -20,7 +20,7 @@ function App() {
         <Route path="/utilisateurs" element={<AddUserForm />} />
         
         {/* Route pour la page des paramètres */}
-        <Route path="/settings" element={<SettingsPage />} />
+        {/* <Route path="/settings" element={<SettingsPage />} /> */}
       </Routes>
     </Router>
   );

@@ -13,3 +13,6 @@
   padding: 20px;
   flex-grow: 1; /* Prend le reste de l'espace */
 }
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
